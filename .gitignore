@@ -1,0 +1,13 @@
+# macOS system files
+.DS_Store
+
+# VSCode settings
+.vscode/
+
+# Build/output directories
+out/
+output/
+
+# Compiled object files
+*.o
+*.exe

@@ -8,7 +8,7 @@ struct Node{
     Node* prev;
     Node* next;
 
-    Node(int nodeKey, int nodeValue) : key(nodeKey), value(nodeValue), prev(nullptr), next(nullptr) {};
+    Node(int nodeKey, int nodeValue) : key(nodeKey),value(nodeValue), prev(nullptr), next(nullptr) {};
 };
 
 
@@ -77,12 +77,12 @@ public:
     [h]<->[1]<->[t]
 
 */
-
     void put(int key, int value) {
         if (cache.count(key)){
-            Node* toUpdate = cache[key];
-            remove(toUpdate);
-            delete toUpdate;
+            Node* candidate = cache[key];
+            remove(candidate);
+            insert(candidate);
+            return;
         };
 
         Node* newNode = new Node(key, value);

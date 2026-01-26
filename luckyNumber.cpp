@@ -10,7 +10,7 @@ Return the largest lucky integer in the array. If there is no lucky integer retu
 2 2
 3 3 
 
-1,2,2,3,3,3
+1,2,2,3,3,2
 
 max = 1
 

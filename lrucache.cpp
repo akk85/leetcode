@@ -61,7 +61,7 @@ public:
     }
 
     int get(int key) {
-        if (cache.count(key)){
+        if (cache.count (key)){
             Node* node = cache[key];
             remove(node);    //remove from it's position and insert it at end as mru 
             insert(node);

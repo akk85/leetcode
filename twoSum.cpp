@@ -11,7 +11,7 @@ Return the answer with the smaller index first.
 class Solution {
 public:
     // using two nested for loops time O(n^2) space O(1)
-    vector<int> twoSum1(vector<int>& nums, int target) {
+    vector<int> twoSum1(const vector<int>& nums, int target) {
         int n = nums.size(); 
         for (int i = 0; i < n; i++){
             for (int j = i + 1; j < n; j++){
@@ -25,7 +25,7 @@ public:
     }
 
     // using a map for tracking the difference time O(n) space O(n)
-    vector<int> twoSum2(vector<int>& nums, int target) {
+    vector<int> twoSum2(const vector<int>& nums, int target) {
         unordered_map<int, int> seen;
 
         for (int i = 0; i < static_cast<int>(nums.size()) ; i++){
@@ -40,7 +40,7 @@ public:
     }
 
 
-    void print(vector<int> vec){
+    void print(const vector<int> vec){
         for (const int& num : vec){
             cout << num << " ";
         }

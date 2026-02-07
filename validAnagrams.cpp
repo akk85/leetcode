@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    // using two maps O(n) time and O(n + m) space
+    // using two maps O(n) time and O(n) space
     bool isAnagram1(string s, string t) {
         if (s.size() != t.size()){
             return false;
@@ -23,6 +23,9 @@ public:
 
     // using only one map saves half the space. O(n) time and O(n) space 
     bool isAnagram2(string s, string t) {
+        if (s.size() != t.size()){
+            return false;
+        }
         unordered_map<char, int> seen;
         for (const char& ch : s){
             seen[ch] += 1;
@@ -38,7 +41,30 @@ public:
         }
         return true;
     }
-    // sort the strings and check characters  O(nlogn) time and O(logn) space due to the recursive stack for sorting 
+
+    bool isAnagram4(string s, string t){
+        if (s.size() != t.size()){
+            return false;
+        }
+        
+        vector<int> vec(26, 0);
+
+        for (const char& ch : s){
+            vec[ch - 'a'] ++;
+        }
+        for (const char& ch : t){
+            vec[ch - 'a'] --;
+        }
+
+        for (const int& pos : vec){
+            if (pos != 0){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    // sort the strings and check characters  O(nlogn) time and O(1) extra space. 
     bool isAnagram3(string s, string t) {
         if (s.size() != t.size()){
             return false;
@@ -58,9 +84,11 @@ int main(){
     cout << boolalpha << sol.isAnagram1(s, t) << endl;
     cout << boolalpha << sol.isAnagram2(s, t) << endl;
     cout << boolalpha << sol.isAnagram3(s, t) << endl;
+    cout << boolalpha << sol.isAnagram4(s, t) << endl;
 
     s = "jar"; t = "jam";
     cout << boolalpha << sol.isAnagram1(s, t) << endl;
     cout << boolalpha << sol.isAnagram2(s, t) << endl;
     cout << boolalpha << sol.isAnagram3(s, t) << endl;
+    cout << boolalpha << sol.isAnagram4(s, t) << endl;
 }

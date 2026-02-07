@@ -3,7 +3,8 @@
 #include <unordered_map>
 class Solution {
 public:
-    // sorting the array O(nlogn) time and O(log n) auxilary stack space from the intrsort recursion stack space;
+    // sorting the array O(nlogn) time and O(1) extra space 
+    // also mutates the input string 
     bool hasDuplicate1(vector<int>& nums) {
         sort(nums.begin(), nums.end());
 
@@ -34,7 +35,7 @@ public:
         }
 
         for (const auto& pair: seen){
-            if (pair.second > 1){
+            if (pair.second != 1){
                 return true;
             }
         }

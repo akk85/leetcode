@@ -15,6 +15,7 @@ Output: [["hat"],["act", "cat"],["stop", "pots", "tops"]]
 
 class Solution {
 public:
+    // Using a hashmap Time O(n * klog k) and Space is O(n)
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
     unordered_map<string, vector<string>> map;
         // build hashmap of anagrams 

@@ -490,7 +490,7 @@ int main(){
     printNodes(newHead);
 
     // 2 3 2 5 4 3 5 7
-    Node* node20 = new Node(5);
+    Node* node20  = new Node(5);
     Node* node19  = new Node(7, node20);
     Node* node18  = new Node(5, node19);   
     Node* node17  = new Node(3, node18);

@@ -9,8 +9,7 @@ public:
         for (int r = 0; r < rows; r++){
             for (int c = 0; c < words[r].size(); c++){
                 
-                if (c >= rows || r >= words[c].size() ||
-                    words[r][c] != words[c][r]){
+                if (c >= rows || r >= words[c].size() || words[r][c] != words[c][r]){
                         return false;
                     }
             }

@@ -45,9 +45,7 @@ public:
     bool contains(int key) {
         return vec[key];
     }
-    
 };
-
 
 
 int main(){

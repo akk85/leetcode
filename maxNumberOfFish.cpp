@@ -50,12 +50,13 @@ public:
         int rows = grid.size();
         int cols = grid[0].size();  
 
+        int land = 0;
         int maxFish {};
         for (int row = 0; row < rows; row++){
             for (int col = 0; col < cols; col++){
                 int cell = grid[row][col];
 
-                if (cell > 0){
+                if (cell != land){
                     int currentFish = bfs(grid, row, col);
                     maxFish = max(maxFish, currentFish);
                 }
@@ -66,6 +67,7 @@ public:
     }
 
     int bfs(vector<vector<int>>& grid, int row, int col){
+        int land = 0;
         int fish = 0;
         int rows = grid.size();
         int cols = grid[0].size();
@@ -91,7 +93,7 @@ public:
                 nr = row + dir.first;
                 nc = col + dir.second;
 
-                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] > 0){
+                if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] != land){
                     int gridFish = grid[nr][nc];
                     fish += gridFish;
                     q.push({nr,nc});

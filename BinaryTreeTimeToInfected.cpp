@@ -71,10 +71,16 @@ pseudo code
 
 class Solution {
 public:
+    unordered_map<TreeNode*, TreeNode*> map;
     int amountOfTime(TreeNode* root, int start) {
         
+        TreeNode* startNode = parentMappingBfs(root, start);
+        int minutes = infectAllNodesBfs(startNode);
+        return minutes;
+    }
+
+    TreeNode* parentMappingBfs(TreeNode* root, int start){
         // 1. bfs for parent mapping
-        unordered_map<TreeNode*, TreeNode*> map; // child -> parent
         TreeNode* startNode = nullptr;
 
         queue<TreeNode*> q;
@@ -95,9 +101,13 @@ public:
                 q.push(node->right);
             }
         }
+        return startNode;
+    }
 
+    int infectAllNodesBfs(TreeNode* startNode){
         // 2. bfs to visit all connected nodes 
         unordered_set<TreeNode*> visited;
+        queue<TreeNode*> q;
         q.push(startNode);
         visited.insert(startNode);
         int minutes = -1;
@@ -123,7 +133,6 @@ public:
             }
             minutes += 1;
         }
-
         return minutes;
     }
 };
@@ -135,12 +144,12 @@ int main(){
                         new TreeNode(3, new TreeNode(10), new TreeNode(6)));
 
 
-    cout << sol.amountOfTime(root, 3) << endl;
+    cout << sol.amountOfTime(root, 3) << endl; //4 
     delete root;
 
     // TestCase 2
     root = new TreeNode(1);
-    cout << sol.amountOfTime(root, 1) << endl;
+    cout << sol.amountOfTime(root, 1) << endl; //0 
     delete root;
 }
 

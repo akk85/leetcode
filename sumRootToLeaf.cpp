@@ -45,7 +45,14 @@ struct TreeNode {
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        int total {};
+        int sum = bfs(root);
+
+        return sum;
+    }
+
+    int bfs(TreeNode* root){
+
+        int total = 0;
         queue<pair<TreeNode*, int >> q;
 
         q.push({root, root->val});
@@ -67,7 +74,6 @@ public:
 
         }
         return total;
-
     }
 };
 

@@ -10,7 +10,7 @@ Every minute, if a fresh fruit is horizontally or vertically adjacent to a rotte
 
 Return the minimum number of minutes that must elapse until there are zero fresh fruits remaining. If this state is impossible within the grid, return -1.
 
-intuition
+Intuition
     1. Any rotten orange spreads rot to its 4 neighbors (up, down, left, right) each minute.
     2. All rotten oranges can act simultaneously, so we start BFS from all rotten oranges at once.
     3. Use BFS layer by layer, where each layer corresponds to 1 minute.
@@ -58,19 +58,33 @@ Time -> 0(m*n) Space is 0(m*n) incase all oranges are rotten
 
 */
 
+#define orange 1
+#define rotten 2
 
 class Solution {
+private:
+    
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-        int rows = grid.size();
-        int cols = grid[0].size();
-        int orange = 1;
-        int rotten = 2;
-        int freshOranges = 0;
         
         queue<pair<int, int>> q;
 
-        // Step 1: initialize queue and count fresh oranges
+        int freshOranges =  getRottenOranges(grid, q);
+
+        if (freshOranges == 0) return 0;
+
+        int minutes = bfs(grid, q, freshOranges);
+
+        if (freshOranges == 0) return minutes;
+        
+        return -1;
+    }
+
+    int getRottenOranges(vector<vector<int>>& grid, queue<pair<int, int>>& q){
+        int freshOranges = 0;
+        int rows = grid.size();
+        int cols = grid[0].size();
+
         for (int row = 0; row < rows; row++){
             for (int col = 0; col < cols; col++){
                 if (grid[row][col] == rotten){
@@ -82,18 +96,15 @@ public:
             }
         }
 
-        if (freshOranges == 0) return 0;
+        return freshOranges;
+    }
+
+    int bfs(vector<vector<int>>& grid, queue<pair<int, int>>& q, int& freshOranges){
+        int rows = grid.size();
+        int cols = grid[0].size();
+        vector<vector<int>> directions {{0, -1},  {0,  1}, {-1, 0}, {1,  0} };
 
         int minutes = 0;
-        // directions to move
-        vector<vector<int>> directions = {
-            {0, -1},  // left
-            {0,  1},  // right
-            {-1, 0},  // up
-            {1,  0},  // down
-        };
-
-        // Step 2: BFS layer by layer
         while(!q.empty()){
             int size = q.size();
             bool infectedThisRound = false;
@@ -115,12 +126,7 @@ public:
             }
             if (infectedThisRound) minutes++;
         }
-
-        // Step 3: if all oranges infected return time else -1
-        if (freshOranges == 0){
-            return minutes;
-        } 
-        return -1;
+        return minutes;
     }
 };
 
@@ -157,7 +163,7 @@ int main(){
         {0,1,2},
     };
 
-    cout << sol.orangesRotting(grid) << endl; //
+    cout << sol.orangesRotting(grid) << endl; // -1
 
 }
 /*

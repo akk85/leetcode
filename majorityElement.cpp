@@ -18,8 +18,8 @@ public:
             counter[num] ++;
         }
 
-        int maxCount = {};
-        int majority {};
+        int maxCount = 0;
+        int majority = 0;
         for (const auto pair : counter){
             int num = pair.first;
             int freq = pair.second;
@@ -48,8 +48,8 @@ public:
     // 5,5,1,1,1,5,1
     // 
     int majorityElement3(vector<int>& nums){
-        int candidate {};
-        int count {};
+        int candidate = 0;
+        int count = 0;
         for (const int& num : nums){
             if (count == 0){
                 candidate = num;

@@ -11,32 +11,34 @@ Thought process
 class Solution{
 public:
     int areaOfLargestContainer(vector<int>& heights){
-        int l = 0;
-        int r = heights.size() - 1;
+        int left  = 0;
+        int right = heights.size() - 1;
 
-        int area = {};
-        while (l < r){
-            int currentArea = min(heights[l], heights[r]) * (r -l);
-            area = max(area, currentArea);
-            if (heights[l] < heights[r]){
-                l++;
-            } else {
-                r--;
-            }
+        int maxArea = 0;
+        while (left < right){
+            int currHeight = min(heights[left], heights[right]);
+            int distance   = right - left;
+
+            int area       = currHeight * distance;
+
+            maxArea        = max(maxArea, area);
+
+            if (heights[left] < heights[right]) left ++;
+            else right --;
         }
 
-        return area;
+        return maxArea;
     }
 };
 
 int main(){
     Solution sol;
 
-    vector<int> heights = {1,7,2,5,4,7,3,6};
+    vector<int> heights = {1,8,6,2,5,4,8,3,7}; 
 
-    cout << sol.areaOfLargestContainer(heights) << endl;
+    cout << sol.areaOfLargestContainer(heights) << endl; // 49
 
     heights = {2,2,2};
 
-    cout << sol.areaOfLargestContainer(heights) << endl;
+    cout << sol.areaOfLargestContainer(heights) << endl; // 4 
 }

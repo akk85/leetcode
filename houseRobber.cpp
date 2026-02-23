@@ -13,7 +13,7 @@ thought process
     to rob a house we actually need to make two decisions either rob or not rob
     to rob meaning add n - 2 neighbor + curr house 
     to not rob means carry forward what n - 1 neighbor had 
-    meaing it all comes to do whats the maximum btwn rob so i - 2 nei and i house vs i - 1 neihbor
+    meaing it all comes to do whats the maximum btwn rob so (i - 2 nei and i house) vs i - 1 neihbor
     we can use a hashmap to just keep track of the previous houses and make decision from that
 
 pseudo code
@@ -25,7 +25,7 @@ pseudo code
     for (int i = 2; i < n; i++)
         rob = house[i-2] + nums[i]
         notRob = house[i-1]
-        map[i] = max(rob, notRob)
+        house[i] = max(rob, notRob)
         
     return map[n - 1]
 */

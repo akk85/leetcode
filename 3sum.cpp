@@ -13,27 +13,24 @@ public:
         vector<vector<int>> res;
         sort(nums.begin(), nums.end());
         int n = nums.size();
+
         for (int i = 0; i < n; i++){
             if (nums[i] > 0) break; // all remaining numbers are positive and cannot add up to make zero 
             if (i != 0 and nums[i] == nums[i - 1]) continue;  // avoid searching again if i value is same as the i value we just searched 
 
-            int l = i + 1;
-            int r = n - 1;
+            int left = i + 1;
+            int right = n - 1;
 
-            while (l < r){
-                int sum = nums[i] + nums[l] + nums[r];
-                if (sum < 0){
-                    l++;
-                } else if (sum > 0){
-                    r--;
-                } else {
-                    res.push_back({nums[i], nums[l], nums[r]});
-                    l++;
-                    r--;
+            while (left < right){
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum < 0)       left ++;
+                else if (sum > 0) right --;
+                else {
+                    res.push_back({nums[i], nums[left], nums[right]});
+                    left  ++;
+                    right --;
                     
-                    while (l < r && nums[l] == nums[l - 1]){
-                        l++;
-                    }
+                    while (left < right && nums[left] == nums[left - 1]) left ++;
                 }
             }
         }
@@ -48,12 +45,22 @@ public:
             l         
               r 
 */
-
+void printResult(vector<vector<int>>& result){
+    for (const vector<int>& vec : result){
+        for (const int& num : vec){
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
 int main(){
     Solution sol;
 
-    vector<int> nums = {-1,0,1,2,-1,-4};
-    sol.threeSum(nums);
+    vector<int> nums = {-4,-1,-1,0,1,2,4}; 
+    vector<vector<int>>  result = sol.threeSum(nums);
 
+
+    printResult(result);
 
 }

@@ -15,13 +15,10 @@ public:
 
         while (left < right){ // strictly less as we cant use same number twice
             int sum = numbers[left] + numbers[right];
-            if (sum < target){
-                left++;
-            } else if (sum > target){
-                right--;
-            } else {
-                return {left + 1, right + 1};
-            }
+            if (sum < target)      left  ++;
+            else if (sum > target) right --;
+            else return {left + 1, right + 1};
+
         }
         return {-1,-1}; // we never reach here
     }
@@ -37,7 +34,7 @@ public:
 int main (){
     Solution sol;
 
-    vector<int> numbers = {1,2,3,4}; int target = 3;
+    vector<int> numbers = {1,2,3,4}; int target = 4;
 
     vector<int> result = sol.twoSum(numbers, target);
 

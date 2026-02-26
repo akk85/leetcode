@@ -13,24 +13,28 @@ class Solution {
 public:
     ListNode* removeNthFromEndTwoIterations(ListNode* head, int n) {
         ListNode* curr = head;
-        int length {};
-        while(curr){
+        int length = 0;
+        while(curr != nullptr){   // find length of list 
             length ++;
             curr = curr->next;
         }
 
-        if (length - n == 0){ // head
-            return head->next;
+        if (length == n){ // remove head node 
+            ListNode* nextNode = head->next;
+            delete head;
+            return nextNode;
         }
 
-        curr = head;
-        for (int i = 1; i < length - n; i++){ //get to node before nth node
+        ListNode* prev = nullptr;
+        curr           = head;
+        while (length != n ){ // go to nth node and point prev to nth node.next 
+            prev = curr;
             curr = curr->next;
+            length --;
         }
 
-        ListNode* toRemove = curr->next;
-        curr->next = curr->next->next;
-        delete toRemove;
+        prev->next = curr->next;
+        delete curr;
         return head;
     }
 

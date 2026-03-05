@@ -75,4 +75,31 @@ int main(){
     1 - 1
     2 - 1
     */
+
+    /*  
+        wanted to use pen and paper 
+        no need for a seen set 
+        he asked me how to pop from a queue
+        asked to go search for queue snytax which is very trivial must know syntax
+        asked how to append to a queue
+
+        ended up using extra space instead of his approach 
+
+    bugs:
+        indexing a node variable
+        iterative over a node ?? 
+
+    problem solving 
+
+
+    problem 2
+        misundersntood the question and went the wrong path
+        definitly reading from somewhere 
+
+        
+        doesnt understand complexities for sorting / heap operations etc 
+        doesnt do a dry run step by step he assumes his code works 
+
+    */
+
 }

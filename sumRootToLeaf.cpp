@@ -60,7 +60,7 @@ public:
         while(!q.empty()){
             pair<TreeNode*, int> currPair = q.front(); q.pop();
             TreeNode* currNode = currPair.first;
-            int currValue = currPair.second;
+            int currValue      = currPair.second;
             if (currNode->left){
                 q.push({currNode->left, currValue * 10 + currNode->left->val});
             } 

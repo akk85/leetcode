@@ -85,7 +85,7 @@ public:
             resizeSmallHeap();
         }
 
-        // resize id needed 
+        // resize id needed -
         int small = smallHeap.size();
         int big  = bigHeap.size();
 

@@ -20,7 +20,7 @@ intution very simple
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        int maxSum = INT_MIN;
+        int maxSum = nums[0]; // incase nums is of size 0 
         int curSum = 0;
 
         for (const int& num : nums){

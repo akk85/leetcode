@@ -9,7 +9,10 @@ Two nodes of a binary tree are cousins if they have the same depth with differen
 Note that in a binary tree, the root node is at the depth 0, 
 and children of each depth k node are at the depth k + 1.
 
-
+Thought process: 
+    map each node with its parent and height
+    find parent and height of node x and same for node y
+    return true if both parents and heighst are same 
 q 
 1
 */

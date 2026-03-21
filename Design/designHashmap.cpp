@@ -17,76 +17,73 @@ void remove(key) removes the key and its corresponding value if the map contains
 */
 struct Node{
     int key;
-    int value;
+    int val;
     Node* next;
-    Node* prev;
-
-    Node(int newkey, int newValue) : key(newkey), value(newValue), next(nullptr), prev(nullptr) {};
+    Node(int nodeKey, int nodeValue) : key(nodeKey), val(nodeValue), next(nullptr) {}
 };
-
 
 class MyHashMap {
 private:
-    unordered_set<int> seen;
-    Node* head;
-    Node* tail;
+    vector<Node*> vec;
+    int hashFunction(int key){
+        int newKey = key % 1000;
+        return newKey;
+    }
 public:
-    MyHashMap() {
-        head = new Node(-1,-1);
-        tail = new Node(-1,-1);
-        head->next = tail;
-        tail->prev = head;
+    MyHashMap() : vec(1000) {
+        for (int index = 0; index < 1000; index++) {
+            vec[index] = new Node(-1, -1);
+        }
     }
-    /*
-    h<->3<->t //4
-    h<->3->4<->t
-    */
+    
     void put(int key, int value) {
-        if (seen.count(key)){
-            remove(key);
+        int newKey = hashFunction(key);
+        Node* head = vec[newKey];
+        Node* curr = head->next;
+
+        while(curr){
+            if (curr->key == key) {
+                curr->val = value;
+                return;
+            }
+            curr = curr->next;
         }
-
-        Node* newNode = new Node(key, value);
-        Node* lastNode = tail->prev;
-        lastNode->next = newNode;
-        newNode->next = tail;
-        tail->prev = newNode;
-        newNode->prev = lastNode;
-        seen.insert(key);
+        Node* newNode  = new Node(key, value);
+        Node* nextNode = head->next;
+        head->next     = newNode;
+        newNode->next  = nextNode;
     }
-
-    // h<->3->4<->t        get(4)
-    //        c
+    
     int get(int key) {
-        if (seen.count(key)){
-            Node* curr = head;
-            while(curr->key != key){
-                curr = curr->next;
-            }
+        int newKey = hashFunction(key);
+        Node* head = vec[newKey];
+        Node* curr = head->next;
 
-            return curr->value;
+        while(curr){
+            if (curr->key == key) return curr->val;
+            curr = curr->next;
         }
+
         return -1;
-    }
-    // h<->3->4<->t        remove(4)
-    //        c
-    // h<->3<->t
-    void remove(int key) {
-        if (seen.count(key)){
-            Node* curr = head;
-            while(curr->key != key){
-                curr = curr->next;
-            }
-            Node* prevNode = curr->prev;
-            Node* nextNode = curr->next;
 
-            prevNode->next = nextNode;
-            nextNode->prev = prevNode;
-            delete curr;
-            seen.erase(key);
-        }
     }
-}; 
+    
+    void remove(int key) {
+        int newKey = hashFunction(key);
+        Node* head = vec[newKey];
+        Node* curr = head;
+
+        while(curr->next){
+            if (curr->next->key == key){
+                Node* candidate = curr->next;
+                curr->next= curr->next->next;
+                delete candidate;
+                return;
+            }
+            curr = curr->next;
+        } 
+    }
+};
 
 int main(){
     MyHashMap* obj = new MyHashMap();
